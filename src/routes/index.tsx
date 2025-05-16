@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-// import Search from "../components/search";
+import Search from "../components/search";
 import Todos from "../components/Todos";
 import AddTodo from "../components/AddTodo";
 import { TodosProvider } from "../hooks/useTodoContext";
@@ -23,8 +23,8 @@ function Home() {
 function Header() {
   return (
     <>
-      {/* <Search /> */}
-      <>search</>
+      <Search />
+
       {/* <Sorting /> */}
     </>
   );
