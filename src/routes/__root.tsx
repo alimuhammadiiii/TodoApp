@@ -4,11 +4,11 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 export const Route = createRootRoute({
   component: Root,
-  // validateSearch: (search) => {
-  //   const todoSearch = typeof search.todoSearch === "string" ? search.todoSearch : null;
+  validateSearch: (search) => {
+    const todoSearch = typeof search.todoSearch === "string" ? search.todoSearch : null;
 
-  //   return { todoSearch };
-  // },
+    return { todoSearch };
+  },
 });
 
 function Root() {
