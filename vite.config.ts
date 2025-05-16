@@ -10,5 +10,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: "/todoApp/",
+  base: "/TodoApp",
 });
