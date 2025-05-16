@@ -3,20 +3,20 @@ import { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
 import { useTodos, useTodosDispatch } from "../hooks/useTodoContext";
-import { Route as Home } from "../routes/index";
+// import { Route as Home } from "../routes/index";
 import { MdDone } from "react-icons/md";
 import type { Todo } from "../hooks/useTodoContext";
 
 export default function Todos() {
   const todos = useTodos();
-  const search = Home.useSearch();
-  const filteredTodos = todos.filter((todo) => {
-    return todo.text.includes(search.todoSearch ?? "");
-  });
+  // const search = Home.useSearch();
+  // const filteredTodos = todos.filter((todo) => {
+  //   return todo.text.includes(search.todoSearch ?? "");
+  // });
 
   return (
     <ul className="grow overflow-y-auto flex flex-col gap-2">
-      {filteredTodos.map((todo) => {
+      {todos.map((todo) => {
         return <TodoItem key={todo.id} todo={todo} />;
       })}
     </ul>
