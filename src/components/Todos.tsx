@@ -38,13 +38,15 @@ export default function Todos() {
   console.log(visibleTodos);
 
   return (
-    <ul className="grow overflow-y-auto flex flex-col gap-2">
+    <>
       <TodoFilter defaultValue={filter} onChangeValue={setFilter} />
       <FilterBySort defaultValue={sortType} onchangeSort={setSortType} />
-      {visibleTodos.map((todo: Todo) => {
-        return <TodoItem key={todo.id} todo={todo} />;
-      })}
-    </ul>
+      <ul className="grow overflow-y-auto flex flex-col gap-2 p-3 mb-14">
+        {visibleTodos.map((todo: Todo) => {
+          return <TodoItem key={todo.id} todo={todo} />;
+        })}
+      </ul>
+    </>
   );
 }
 
@@ -113,7 +115,7 @@ function TodoFilter({
   onChangeValue: (value: "default" | "complete" | "inProgress") => void;
 }) {
   return (
-    <div className="flex gap-2.5">
+    <div className="flex gap-2.5 px-3">
       <p>Filter</p>
       <select
         className="bg-white rounded"
@@ -136,7 +138,7 @@ function FilterBySort({
   onchangeSort: (value: "alphabet" | "date" | "none") => void;
 }) {
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-3 px-3">
       <label>Sort</label>
       <select
         className="bg-white rounded"

@@ -6,7 +6,7 @@ export default function AddTodo() {
   const todoDispatch = useTodosDispatch();
 
   return (
-    <div className="bg-white/30 backdrop-blur-md flex gap-3 rounded min-h-[45px]">
+    <div className="bg-white/30 backdrop-blur-md flex gap-3 rounded min-h-[45px] absolute bottom-3 left-3 right-3">
       <button
         onClick={() => {
           if (text.trim() === "") {
@@ -15,7 +15,7 @@ export default function AddTodo() {
           todoDispatch({ type: "add", payload: { text: text } });
           setText("");
         }}
-        className="bg-inherit add-bottom cursor-pointer h-full w-10 flex justify-center items-center"
+        className="bg-inherit add-bottom cursor-pointer h-11 w-10 flex justify-center items-center"
       >
         <IoMdAdd size={20} />
       </button>
@@ -24,7 +24,7 @@ export default function AddTodo() {
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="grow h-full outline-none text-black placeholder:text-black"
+        className="grow outline-none text-black placeholder:text-black h-11"
       />
     </div>
   );
