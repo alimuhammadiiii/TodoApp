@@ -5,6 +5,7 @@ export type Todo = {
   id: string;
   isComplete: boolean;
   isEdit: boolean;
+  createdAt: Date;
 };
 
 const TodosContext = createContext<Array<Todo>>(null!);
@@ -60,6 +61,7 @@ function todosReducer(todos: Array<Todo>, action: TodoAction) {
           id: crypto.randomUUID(),
           isComplete: false,
           isEdit: false,
+          createdAt: new Date(),
         },
         ...todos,
       ];

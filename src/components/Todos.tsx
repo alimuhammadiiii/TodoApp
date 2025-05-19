@@ -1,4 +1,4 @@
-import { useRef, type ReactNode } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
 import { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
@@ -8,15 +8,40 @@ import { MdDone } from "react-icons/md";
 import type { Todo } from "../hooks/useTodoContext";
 
 export default function Todos() {
+  const [filter, setFilter] = useState<"default" | "complete" | "inProgress">("default");
+  const [sortType, setSortType] = useState<"none" | "date" | "alphabet">("none");
   const todos = useTodos();
   const search = Home.useSearch();
   const filteredTodos = todos.filter((todo) => {
     return todo.text.includes(search.todoSearch ?? "");
   });
 
+  const visibleTodos = useMemo(() => {
+    let result = filteredTodos.filter((todo) => {
+      if (filter === "complete") {
+        return todo.isComplete;
+      }
+      if (filter === "inProgress") {
+        return !todo.isComplete;
+      }
+
+      return true;
+    });
+
+    if (sortType === "alphabet") {
+      return (result = [...result].sort((a, b) => a.text.localeCompare(b.text)));
+    } else if (sortType === "date") {
+      return (result = [...result].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()));
+    }
+    return result;
+  }, [filter, filteredTodos, sortType]);
+  console.log(visibleTodos);
+
   return (
     <ul className="grow overflow-y-auto flex flex-col gap-2">
-      {filteredTodos.map((todo) => {
+      <TodoFilter defaultValue={filter} onChangeValue={setFilter} />
+      <FilterBySort defaultValue={sortType} onchangeSort={setSortType} />
+      {visibleTodos.map((todo: Todo) => {
         return <TodoItem key={todo.id} todo={todo} />;
       })}
     </ul>
@@ -59,6 +84,7 @@ function TodoItem({ todo }: { todo: Todo }) {
         type="text"
         disabled={!todo.isEdit}
       />
+      <p className="whitespace-nowrap">{todo.createdAt.toLocaleString("fa-IR")}</p>
       <Button
         className="custom-btn flex justify-center items-center"
         onClick={() => {
@@ -76,6 +102,51 @@ function TodoItem({ todo }: { todo: Todo }) {
         {todo.isEdit ? <MdDone size={23} /> : <MdModeEditOutline size={23} />}
       </Button>
     </li>
+  );
+}
+
+function TodoFilter({
+  defaultValue,
+  onChangeValue,
+}: {
+  defaultValue: string;
+  onChangeValue: (value: "default" | "complete" | "inProgress") => void;
+}) {
+  return (
+    <div className="flex gap-2.5">
+      <p>Filter</p>
+      <select
+        className="bg-white rounded"
+        defaultValue={defaultValue}
+        onChange={(e) => onChangeValue(e.target.value as "default" | "complete" | "inProgress")}
+      >
+        <option value="default">All Todos</option>
+        <option value="complete">Complete</option>
+        <option value="inProgress">In Progress</option>
+      </select>
+    </div>
+  );
+}
+
+function FilterBySort({
+  defaultValue,
+  onchangeSort,
+}: {
+  defaultValue: string;
+  onchangeSort: (value: "alphabet" | "date" | "none") => void;
+}) {
+  return (
+    <div className="flex gap-3">
+      <label>Sort</label>
+      <select
+        className="bg-white rounded"
+        defaultValue={defaultValue}
+        onChange={(e) => onchangeSort(e.target.value as "alphabet" | "date" | "none")}
+      >
+        <option value="date">Date</option>
+        <option value="alphabet">Alphabet</option>
+      </select>
+    </div>
   );
 }
 
