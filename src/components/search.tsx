@@ -11,7 +11,7 @@ export default function Search() {
   }, 1000);
 
   return (
-    <div className="w-full max-w-sm min-w-[200px] p-3">
+    <div className="w-full max-w-sm min-w-[200px] p-4">
       <div className="relative">
         <input
           defaultValue={search.todoSearch ?? ""}
