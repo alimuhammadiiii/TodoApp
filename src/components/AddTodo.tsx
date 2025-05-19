@@ -6,7 +6,7 @@ export default function AddTodo() {
   const todoDispatch = useTodosDispatch();
 
   return (
-    <div className="bg-white/30 backdrop-blur-md flex gap-3 rounded min-h-[45px] absolute bottom-3 left-3 right-3">
+    <div className="bg-white/30 backdrop-blur-md flex gap-3 rounded min-h-[45px] absolute bottom-3 left-3 right-3 overflow-hidden">
       <button
         onClick={() => {
           if (text.trim() === "") {
