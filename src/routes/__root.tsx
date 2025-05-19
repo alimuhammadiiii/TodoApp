@@ -13,7 +13,7 @@ export const Route = createRootRoute({
 function Root() {
   return (
     <>
-      <div className="bg-[url(assets/cover1.jpg)] bg-cover flex flex-col p-4 gap-4 grow h-full">
+      <div className="bg-[url(assets/cover1.jpg)] bg-cover flex flex-col gap-4 grow h-full">
         {" "}
         <Outlet />
       </div>

@@ -41,7 +41,7 @@ export default function Todos() {
     <>
       <TodoFilter defaultValue={filter} onChangeValue={setFilter} />
       <FilterBySort defaultValue={sortType} onchangeSort={setSortType} />
-      <ul className="grow overflow-y-auto flex flex-col gap-2 p-3 mb-14">
+      <ul className="grow overflow-y-auto flex flex-col gap-2 p-4 mb-14">
         {visibleTodos.map((todo: Todo) => {
           return <TodoItem key={todo.id} todo={todo} />;
         })}
@@ -115,7 +115,7 @@ function TodoFilter({
   onChangeValue: (value: "default" | "complete" | "inProgress") => void;
 }) {
   return (
-    <div className="flex gap-2.5 px-3">
+    <div className="flex gap-2.5 px-4">
       <p>Filter</p>
       <select
         className="bg-white rounded"
@@ -138,7 +138,7 @@ function FilterBySort({
   onchangeSort: (value: "alphabet" | "date" | "none") => void;
 }) {
   return (
-    <div className="flex gap-3 px-3">
+    <div className="flex gap-3 px-4">
       <label>Sort</label>
       <select
         className="bg-white rounded"
